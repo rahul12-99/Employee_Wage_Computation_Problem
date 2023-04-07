@@ -5,69 +5,74 @@ import java.util.Scanner;
 public class EmployeeWageBuilder {
     /**
      * This method is for calculating daily employee wage
-     * and also part-time employee wage.
+     * and also part-time employee wage for a month.
      *
      * @param args
      */
 
     public static void main(String[] args) {
-
         /*
-         * 1) calculate the random number and declared some variable
-         *    and import the scanner class for taking user input in program.
-         * 2) taking switch statement and doing program case wise.
-         * 3) check employee is full-time and if employee
-              is full-time taking user input for working hour
-              and wage per hour then calculating and printing total wage.
-         * 4) check employee is part-time and if employee
-              is part-time taking user input for working hour
-              and wage per hour then calculating and printing total wage.
-         * 5) if employee is absent.
+         * 1) Get the value from user for wage of employee.
+         * 2) Get the value from user for number of days.
+         * 3) Calculate the random number.
+         * 4) Calculate the wage of employee if employee is full time.
+         * 5) Calculate the wage of employee if employee is partially present.
+         * 6) Print if employee is absent.
+         * 7) Print total wage of employee.
          */
-
-        /*
-         * 1) calculate the random number.
-         */
-        int isPresent = (int) (Math.random() * 3);
-        int wagePerHour, totalWage;
         Scanner sc = new Scanner(System.in);
+
         /*
-         * 2) taking switch statement and doing program case wise.
+         * 1) Get the value from user for wage of employee
          */
-        switch (isPresent) {
+        System.out.println("Please enter daily wage of employee");
+        int wageOfEmployee = sc.nextInt();
+        int totalWageOfEmployee = 0;
+
+        /*
+         * 2) Get the value from user for number of days
+         */
+        System.out.println("Please enter number of days");
+        int numberOfDays = sc.nextInt();
+
+        for (int i = 1; i <= numberOfDays; i++) {
+
             /*
-             * 3) check employee is present and if employee
-             *    is present taking user input for working hour
-             *    and wage per hour then calculating and printing total wage.
+             * 3) Calculate the random number
              */
-            case 1:
-                System.out.println("....Employee is full time....");
-                System.out.println("Please enter wage per hour ₹ !");
-                wagePerHour = sc.nextInt();
-                System.out.println("Please enter full day working hour !");
-                int fullDayWorkingHour = sc.nextInt();
-                totalWage = wagePerHour * fullDayWorkingHour;
-                System.out.println("Total wage of employee is : " + totalWage + "₹");
-                break;
-                /*
-                 * 4) check employee is part-time and if employee
-                 *   is part-time taking user input for working hour
-                 *   and wage per hour then calculating and printing total wage.
-                 */
-            case 2:
-                System.out.println("....Employee is part time....");
-                System.out.println("Please enter wage per hour ₹ !");
-                wagePerHour = sc.nextInt();
-                System.out.println("Please enter part time working hour !");
-                int partTimeWorkingHour = sc.nextInt();
-                totalWage = wagePerHour * partTimeWorkingHour;
-                System.out.println("Total wage of employee is : " + totalWage + "₹");
-                break;
-                /*
-                 * 5) if employee is absent.
-                 */
-            default:
-                System.out.println("....Employee is absent....");
+            int isPresent = (int) (Math.random() * 3);
+
+            /*
+             * 4) Calculate the wage of employee if employee is full time
+             */
+            if (isPresent == 1) {
+                totalWageOfEmployee += wageOfEmployee;
+                System.out.println("Employee is full time on day " + i);
+                System.out.println("Employee earned " + wageOfEmployee + "₹");
+            }
+
+            /*
+             * 5) Calculate the wage of employee if employee is partially present
+             */
+            else if (isPresent == 2) {
+                totalWageOfEmployee += (wageOfEmployee / 2);
+                System.out.println("Employee is partial present on day " + i);
+                System.out.println("Employee earned " + (wageOfEmployee/2) + "₹");
+            }
+
+            /*
+             * 6) Print if employee is absent.
+             */
+            else {
+                System.out.println("Employee is absent on day " + i );
+                System.out.println("Employee earned " + 0 + "₹");
+            }
         }
+
+        /*
+         * 7) Print total wage of employee.
+         */
+        System.out.println("Employee earned " + totalWageOfEmployee + "₹");
+        sc.close();
     }
 }
