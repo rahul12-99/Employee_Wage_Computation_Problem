@@ -13,53 +13,61 @@ public class EmployeeWageBuilder {
     public static void main(String[] args) {
 
         /*
-         * 1) calculate the random number.
-         * 2) check employee is full-time and if employee
+         * 1) calculate the random number and declared some variable
+         *    and import the scanner class for taking user input in program.
+         * 2) taking switch statement and doing program case wise.
+         * 3) check employee is full-time and if employee
               is full-time taking user input for working hour
               and wage per hour then calculating and printing total wage.
-         * 3) check employee is part-time and if employee
+         * 4) check employee is part-time and if employee
               is part-time taking user input for working hour
               and wage per hour then calculating and printing total wage.
-         * 4) if employee is absent.
+         * 5) if employee is absent.
          */
 
         /*
          * 1) calculate the random number.
          */
-        double isPresent = Math.random() * 3;
+        int isPresent = (int) (Math.random() * 3);
+        int wagePerHour, totalWage;
+        Scanner sc = new Scanner(System.in);
         /*
-         * 2) check employee is present and if employee
-              is present taking user input for working hour
-              and wage per hour then calculating and printing total wage.
+         * 2) taking switch statement and doing program case wise.
          */
-        if (isPresent >= 2) {
-            System.out.println("....Employee is full time....");
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Please enter wage per hour ₹ !");
-            int wagePerHour = sc.nextInt();
-            System.out.println("Please enter full day working hour !");
-            int fullDayWorkingHour = sc.nextInt();
-            int totalWage = wagePerHour * fullDayWorkingHour;
-            System.out.println("Total wage of employee is : " + totalWage + "₹");
+        switch (isPresent) {
             /*
-             * 3) check employee is part-time and if employee
-             *   is part-time taking user input for working hour
-             *   and wage per hour then calculating and printing total wage.
+             * 3) check employee is present and if employee
+             *    is present taking user input for working hour
+             *    and wage per hour then calculating and printing total wage.
              */
-        }else if(isPresent >= 1 && isPresent < 2){
-            System.out.println("....Employee is part time....");
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Please enter wage per hour ₹ !");
-            int wagePerHour = sc.nextInt();
-            System.out.println("Please enter part time working hour !");
-            int partTimeWorkingHour = sc.nextInt();
-            int totalWage = wagePerHour * partTimeWorkingHour;
-            System.out.println("Total wage of employee is : " + totalWage + "₹");
-            /*
-             * 3) if employee is absent.
-             */
-        } else {
-            System.out.println("....Employee is absent....");
+            case 1:
+                System.out.println("....Employee is full time....");
+                System.out.println("Please enter wage per hour ₹ !");
+                wagePerHour = sc.nextInt();
+                System.out.println("Please enter full day working hour !");
+                int fullDayWorkingHour = sc.nextInt();
+                totalWage = wagePerHour * fullDayWorkingHour;
+                System.out.println("Total wage of employee is : " + totalWage + "₹");
+                break;
+                /*
+                 * 4) check employee is part-time and if employee
+                 *   is part-time taking user input for working hour
+                 *   and wage per hour then calculating and printing total wage.
+                 */
+            case 2:
+                System.out.println("....Employee is part time....");
+                System.out.println("Please enter wage per hour ₹ !");
+                wagePerHour = sc.nextInt();
+                System.out.println("Please enter part time working hour !");
+                int partTimeWorkingHour = sc.nextInt();
+                totalWage = wagePerHour * partTimeWorkingHour;
+                System.out.println("Total wage of employee is : " + totalWage + "₹");
+                break;
+                /*
+                 * 5) if employee is absent.
+                 */
+            default:
+                System.out.println("....Employee is absent....");
         }
     }
 }
