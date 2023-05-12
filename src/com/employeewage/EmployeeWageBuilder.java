@@ -12,6 +12,10 @@ public class EmployeeWageBuilder implements IEmployeeWage{
      Using Array list and passing CompanyEmployeeWage class as a parameter
      */
     ArrayList<CompanyEmployeeWage> companyEmpWageArray = new ArrayList<>();
+    /*
+     Using Array list for storing the daily wage
+     */
+    ArrayList<Integer> dailyWage = new ArrayList<>();
 
     /*
      This method is for adding all company data in arraylist
@@ -53,6 +57,7 @@ public class EmployeeWageBuilder implements IEmployeeWage{
                     empHrs = 0;
             }
             totalEmpHrs += empHrs;
+            dailyWage.add(empHrs * companyEmpWage.ratePerHour);
         }
         return totalEmpHrs * companyEmpWage.ratePerHour;
     }
