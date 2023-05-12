@@ -1,5 +1,6 @@
 package com.employeewage;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EmployeeWageBuilder implements IEmployeeWage{
     /**
@@ -16,6 +17,10 @@ public class EmployeeWageBuilder implements IEmployeeWage{
      Using Array list for storing the daily wage
      */
     ArrayList<Integer> dailyWage = new ArrayList<>();
+    /*
+     Using hashmap for getting total wage when queried by company
+     */
+    HashMap<String, CompanyEmployeeWage> map = new HashMap<>();
 
     /*
      This method is for adding all company data in arraylist
@@ -35,6 +40,11 @@ public class EmployeeWageBuilder implements IEmployeeWage{
             companyEmpWageArray.get(i).setTotalEmpWage(this.computeEmployeeWage(companyEmpWageArray.get(i)));
             System.out.println(companyEmpWageArray.get(i));
         }
+    }
+
+    @Override
+    public int getTotalWage(String Company) {
+        return map.get(Company).totalEmpWage;
     }
 
     /**

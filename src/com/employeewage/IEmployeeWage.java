@@ -6,6 +6,6 @@ package com.employeewage;
 
 public interface IEmployeeWage {
     void addCompanyEmployeeWage(String Company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth);
-
     void computeEmployeeWage();
+    public int getTotalWage(String Company );
 }
