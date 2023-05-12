@@ -1,5 +1,5 @@
 package com.employeewage;
-
+import java.util.ArrayList;
 
 public class EmployeeWageBuilder implements IEmployeeWage{
     /**
@@ -7,27 +7,29 @@ public class EmployeeWageBuilder implements IEmployeeWage{
      */
     public static final int IS_PART_TIME = 1;
     public static final int IS_FULL_TIME = 2;
-
     private int numOfCompany = 0;
-    CompanyEmployeeWage[] companyEmpWageArray = new CompanyEmployeeWage[5];
+    /*
+     Using Array list and passing CompanyEmployeeWage class as a parameter
+     */
+    ArrayList<CompanyEmployeeWage> companyEmpWageArray = new ArrayList<>();
 
-    /**
-     * This method is for adding company employee wage for each individual company taking it in array
+    /*
+     This method is for adding all company data in arraylist
      */
     @Override
-    public void addCompanyEmployeeWage(String Company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth) {
-        companyEmpWageArray[numOfCompany] = new CompanyEmployeeWage(Company, empRatePerHour, numOfWorkingDays, maxHoursPerMonth);
+    public void addCompanyEmployeeWage(String Company, int empRatePerHour, int noOfWorkingDays, int maxHoursPerMonth) {
+        companyEmpWageArray.add(numOfCompany, new CompanyEmployeeWage(Company, empRatePerHour, noOfWorkingDays, maxHoursPerMonth));
         numOfCompany++;
     }
 
-    /**
-     * This method is for compute employeeWage for multiple company
+    /*
+     This method is for getting the data form arraylist and printing
      */
     @Override
     public void computeEmployeeWage() {
         for (int i = 0; i < numOfCompany; i++) {
-            companyEmpWageArray[i].setTotalEmpWage(this.computeEmployeeWage(companyEmpWageArray[i]));
-            System.out.println(companyEmpWageArray[i]);
+            companyEmpWageArray.get(i).setTotalEmpWage(this.computeEmployeeWage(companyEmpWageArray.get(i)));
+            System.out.println(companyEmpWageArray.get(i));
         }
     }
 
@@ -57,7 +59,6 @@ public class EmployeeWageBuilder implements IEmployeeWage{
 
     /**
      * This is main method of our program for calling the all methods and printing
-     * @param args
      */
     public static void main(String[] args) {
         EmployeeWageBuilder employeeWage = new EmployeeWageBuilder();
