@@ -3,71 +3,71 @@ package com.employeewage;
 
 public class EmployeeWageBuilder {
     /**
-     * Initialize the variable which is final
+     * Initialize the variable
      */
-    public static final int IS_FULL_TIME = 1;
     public static final int IS_PART_TIME = 2;
-    private final String Company;
-    private final int empRatePerHour;
-    private final int numOfWorkingDays;
-    private final int maxHoursPerMonth;
-    private int totalEmpWage;
+    public static final int IS_FULL_TIME = 1;
+    private int noOfCompany = 0;
+    private final CompanyEmployeeWage[] companyEmployeeWage;
 
-    /**
-     * Created a parametrized constructor for private variable
+    /*
+     created constructor for passing size in array for company
      */
-    public EmployeeWageBuilder(String company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth) {
-        this.Company = company;
-        this.empRatePerHour = empRatePerHour;
-        this.numOfWorkingDays = numOfWorkingDays;
-        this.maxHoursPerMonth = maxHoursPerMonth;
+    public EmployeeWageBuilder() {
+        companyEmployeeWage = new CompanyEmployeeWage[5];
     }
 
-    /**
-     * This method is save total wage for company
+    /*
+     This method for adding the company employee wage and passing variable as an arguments
      */
-    public void company() {
-        int empHrs, totalWorkingDays = 0, totalEmpHrs = 0;
+    private void addCompanyEmpWage(String company, int ratePerHour, int noOfWorkingDays, int maxWorkingHours) {
+        companyEmployeeWage[noOfCompany] = new CompanyEmployeeWage(company, ratePerHour, noOfWorkingDays, maxWorkingHours);
+        noOfCompany++;
+    }
 
-        while (totalEmpHrs <= maxHoursPerMonth &&
-                totalWorkingDays < numOfWorkingDays) {
+    /*
+     This method is for get monthly wage for each company
+     */
+    private void getMonthlyWages() {
+        for (int i = 0; i < noOfCompany; i++) {
+            companyEmployeeWage[i].setTotalEmpWage(this.getMonthlyWage(companyEmployeeWage[i]));
+            System.out.println(companyEmployeeWage[i]);
+        }
+    }
+    /*
+     This method is for getMonthly wage for all individual company and returning the totalWage
+     */
+
+    public int getMonthlyWage(CompanyEmployeeWage companyWage) {
+        int totalEmpHours = 0, totalWorkingDays = 0;
+        while (totalEmpHours < companyWage.maxWorkingHours && totalWorkingDays < companyWage.noOfWorkingDays) {
             totalWorkingDays++;
+            int empHours;
             int empCheck = (int) Math.floor(Math.random() * 10) % 3;
             switch (empCheck) {
-                case IS_PART_TIME:
-                    empHrs = 4;
-                    break;
                 case IS_FULL_TIME:
-                    empHrs = 8;
+                    empHours = 8;
+                    break;
+                case IS_PART_TIME:
+                    empHours = 4;
                     break;
                 default:
-                    empHrs = 0;
+                    empHours = 0;
+                    break;
             }
-            totalEmpHrs += empHrs;
+            totalEmpHours += empHours;
         }
-        totalEmpWage = totalEmpHrs * empRatePerHour;
+        return totalEmpHours * companyWage.ratePerHour;
     }
 
-    /**
-     * To string method for printing
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "Total Emp Wage for " + Company + " = " + totalEmpWage;
-    }
-
-    /**
-     * This is main method of the program for taking input and calling the company method
-     * and printing the total employee wage
+    /*
+     * This is main method of our program for calling the all method and printing
      */
     public static void main(String[] args) {
-        EmployeeWageBuilder dMart = new EmployeeWageBuilder("DMart", 23, 25, 80);
-        dMart.company();
-        System.out.println(dMart);
-        EmployeeWageBuilder reliance = new EmployeeWageBuilder("Reliance", 25, 20, 90);
-        reliance.company();
-        System.out.println(reliance);
-
+        System.out.println("Welcome to employee wage calculator");
+        EmployeeWageBuilder employeeWageBuilder = new EmployeeWageBuilder();
+        employeeWageBuilder.addCompanyEmpWage("D-Mart", 23, 27,80);
+        employeeWageBuilder.addCompanyEmpWage("Reliance", 25, 20, 90);
+        employeeWageBuilder.getMonthlyWages();
     }
 }
